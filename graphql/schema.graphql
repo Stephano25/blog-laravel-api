@@ -1,3 +1,6 @@
+# Déclaration unique du scalar DateTime
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
 type User {
     id: ID!
     name: String!
@@ -63,7 +66,7 @@ type Query {
 
 type Mutation {
     login(email: String!, password: String!): AuthPayload! @field(resolver: "App\\GraphQL\\Mutations\\LoginMutation")
-    createPost(input: CreatePostInput!): Post! @create @can(ability: "create", model: "App\\Models\\Post")
-    updatePost(id: ID!, input: UpdatePostInput!): Post! @update @can(ability: "update", find: "id")
-    deletePost(id: ID!): Boolean! @delete @can(ability: "delete", find: "id")
+    createPost(input: CreatePostInput!): Post! @create
+    updatePost(id: ID!, input: UpdatePostInput!): Post! @update
+    deletePost(id: ID!): Boolean! @delete
 }

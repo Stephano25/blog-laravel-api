@@ -1,7 +1,11 @@
 <?php
 
 return [
-    // Le routeur GraphQL
+    /*
+    |--------------------------------------------------------------------------
+    | Route Configuration
+    |--------------------------------------------------------------------------
+    */
     'route' => [
         'prefix' => 'graphql',
         'middleware' => [
@@ -9,19 +13,47 @@ return [
         ],
     ],
     
-    // Le routeur GraphQL Playground
+    /*
+    |--------------------------------------------------------------------------
+    | GraphQL Playground Configuration
+    |--------------------------------------------------------------------------
+    */
     'graphiql' => [
         'enabled' => env('LIGHTHOUSE_GRAPHIQL_ENABLED', true),
         'route' => [
             'prefix' => 'graphql-playground',
             'middleware' => [
-                \Illuminate\Session\Middleware\StartSession::class,
+                // Désactiver temporairement StartSession pour SQLite
+                // \Illuminate\Session\Middleware\StartSession::class,
             ],
         ],
     ],
     
-    // Le schéma GraphQL
+    /*
+    |--------------------------------------------------------------------------
+    | Schema Configuration
+    |--------------------------------------------------------------------------
+    */
     'schema' => [
         'register' => base_path('graphql/schema.graphql'),
+    ],
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Scalar Configuration
+    |--------------------------------------------------------------------------
+    */
+    'scalars' => [
+        'DateTime' => \Nuwave\Lighthouse\Schema\Types\Scalars\DateTime::class,
+    ],
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Configuration
+    |--------------------------------------------------------------------------
+    */
+    'cache' => [
+        'enable' => env('LIGHTHOUSE_CACHE_ENABLE', false),
+        'max_age' => env('LIGHTHOUSE_CACHE_MAX_AGE', 0),
     ],
 ];
