@@ -3,12 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use Nuwave\Lighthouse\Http\GraphQLController;
 
-// Route pour GraphQL
-Route::post('graphql', [GraphQLController::class, '__invoke'])
-    ->middleware('web')
+// Route pour GraphQL API
+Route::post('/graphql', [GraphQLController::class, '__invoke'])
     ->name('graphql');
 
-// Route pour GraphQL Playground (interface de test)
-Route::get('graphql-playground', function () {
-    return view('lighthouse::graphql-playground');
-})->middleware('web')->name('graphql-playground');
+// Route pour GraphQL Playground (vue personnalisée)
+Route::get('/graphql-playground', function () {
+    return view('graphql.playground');
+})->name('graphql-playground');
+
+// Route alternative
+Route::get('/playground', function () {
+    return view('graphql.playground');
+})->name('playground');
